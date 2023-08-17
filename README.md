@@ -57,10 +57,16 @@ docker run -d -e FORWARD_SERVER="<FORWARD_SERVER>" -e FORWARD_PORT="<FORWARD_POR
 The `FORWARD_SERVER` should be deployed with [gost server](https://github.com/ginuerzh/gost), the format should be `IP:PORT`.
 The `FORWARD_PORT` is the port you want to map the 22 port of the container to.
 
-After running this command, you should be able to SSH into your container using the ADMIN_PASSWORD you set during the build, with the command:
+After running this command, you should be able to SSH into your container using the ADMIN_PASSWORD(default as testadminpassword) you set during the build, with the command:
 
 ```bash
 ssh admin@<FORWARD_SERVER.IP> -p <FORWARD_PORT>
+```
+
+You can test whether pytorch can use GPU by running the following command:
+
+```bash
+python -c "import torch; print(torch.cuda.is_available(), torch.cuda.device_count())"
 ```
 
 Please feel free to reach out with any issues or questions. You can refer to the Dockerfile for more information on the tools installed in the image.
