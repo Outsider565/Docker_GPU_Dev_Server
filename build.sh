@@ -27,6 +27,10 @@ GIT_USER_EMAIL=${GIT_USER_EMAIL:-""}
 read -p "Enter USE_TUNA_MIRROR [true]: " USE_TUNA_MIRROR
 USE_TUNA_MIRROR=${USE_TUNA_MIRROR:-"true"}
 
+read -p "Enter Ubuntu version, if 22.04->jammy, if 20.04->focal [focal]: " UBUNTU_VERSION
+UBUNTU_VERSION=${UBUNTU_VERSION:-focal}
+
+
 GOST_FILE=$(basename ${GOST_URL} .gz)
 
 echo "build command: \
@@ -39,6 +43,7 @@ docker build . -t ${DOCKER_TAG} \
   --build-arg GIT_USER_NAME="${GIT_USER_NAME}" \
   --build-arg GIT_USER_EMAIL=${GIT_USER_EMAIL} \
   --build-arg USE_TUNA_MIRROR=${USE_TUNA_MIRROR} \
+  --build-arg UBUNTU_VERSION=${UBUNTU_VERSION} \
   --network host"
 
 docker build . -t ${DOCKER_TAG} \
@@ -50,4 +55,5 @@ docker build . -t ${DOCKER_TAG} \
   --build-arg GIT_USER_NAME="${GIT_USER_NAME}" \
   --build-arg GIT_USER_EMAIL=${GIT_USER_EMAIL} \
   --build-arg USE_TUNA_MIRROR=${USE_TUNA_MIRROR} \
+  --build-arg UBUNTU_VERSION=${UBUNTU_VERSION} \
   --network host
